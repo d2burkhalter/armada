@@ -8,7 +8,7 @@
  </p>
 </div>
 
-Very important change that is now signed
+Very important change that is now signed for real this time
 
 # Armada
 
