@@ -1,5 +1,3 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/go .
 {
 	"name": "Go",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
@@ -29,5 +27,6 @@
 	"mounts": [
 		"source=armada-lookoutui-node_modules,target=${containerWorkspaceFolder}/internal/lookoutui/node_modules,type=volume"
 	],
-	"postCreateCommand": "sudo chown -R vscode:vscode /workspaces/armada/internal/lookoutui/node_modules && go mod download"
+	"postCreateCommand": "bash .devcontainer/postCreate.sh",
+	"runArgs": ["--env-file", ".devcontainer/devcontainer.env"]
 }
