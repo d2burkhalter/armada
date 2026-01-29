@@ -1,5 +1,15 @@
 FROM mcr.microsoft.com/devcontainers/go:2-1.25
 
+# Workaround for Yarn APT repo GPG key expiration issue.
+# The base image includes Yarn apt sources which have an expired GPG key,
+# causing apt-get update to fail during devcontainer feature installation.
+# Since this project doesn't need Yarn, we remove the problematic sources.
+# See: https://github.com/devcontainers/features/issues/1543
+USER root
+RUN rm -f /etc/apt/sources.list.d/yarn.list \
+  && rm -f /usr/share/keyrings/yarn.gpg \
+  && apt-get update
+
 # Install protoc
 RUN ARCH=$(uname -m | sed 's/aarch64/aarch_64/' | sed 's/x86_64/x86_64/') && \
   curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v25.1/protoc-25.1-linux-${ARCH}.zip && \

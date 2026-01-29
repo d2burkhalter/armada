@@ -29,7 +29,8 @@ fi
 
 # Fix permissions on node_modules
 echo "Setting permissions on node_modules..."
-sudo chown -R vscode:vscode /workspaces/armada/internal/lookoutui/node_modules
+sudo chown -R vscode:vscode $PWD/internal/lookoutui/node_modules
+sudo chown -R vscode:vscode $PWD/website/node_modules
 
 # Download Go modules
 echo "Downloading Go modules..."
