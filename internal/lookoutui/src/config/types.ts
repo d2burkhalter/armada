@@ -39,6 +39,11 @@ export interface JobLinkConfig {
   linkTemplate: string
 }
 
+export interface TrackingScriptConfig {
+  src: string
+  attributes?: Record<string, string>
+}
+
 // This must match the UIConfig Go struct defined in internal/lookout/configuration/types.go
 export interface LookoutUiConfig {
   armadaApiBaseUrl: string
@@ -55,6 +60,7 @@ export interface LookoutUiConfig {
   pinnedTimeZoneIdentifiers: string[]
   errorMonitoring: ErrorMonitoringConfig
   customThemeConfigs: CustomThemeConfigs | undefined
+  trackingScript: TrackingScriptConfig | undefined
 }
 
 export interface Config extends LookoutUiConfig {

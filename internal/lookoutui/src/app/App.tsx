@@ -12,6 +12,7 @@ import { dayJsLocales, getBrowserSupportedLocale } from "../common/locales"
 import { withRouter } from "../common/utils"
 import { AlertInPageContainerErrorFallback } from "../components/AlertInPageContainerErrorFallback"
 import { FullPageErrorFallback } from "../components/FullPageErrorFallback"
+import { TrackingScript } from "../components/TrackingScript"
 import { getConfig } from "../config"
 import { LookoutThemeProvider } from "../lookoutThemeState"
 import { OidcAuthProvider } from "../oidcAuth"
@@ -82,6 +83,7 @@ export function App(props: AppProps) {
 
   return (
     <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+      <TrackingScript config={config.trackingScript} />
       <LookoutThemeProvider>
         <CssBaseline />
         <SnackbarProvider
