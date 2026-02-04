@@ -144,6 +144,15 @@ type JobLinkConfig struct {
 	LinkTemplate string `json:"linkTemplate"`
 }
 
+type TrackingScriptConfig struct {
+	// Src is the URL of the tracking script
+	Src string `json:"src"`
+	// Attributes is a map of HTML attributes to add to the script tag
+	Attributes map[string]string `json:"attributes,omitempty"`
+	// Provider identifies the analytics provider (umami, plausible, google-analytics, custom)
+	Provider string `json:"provider,omitempty"`
+}
+
 // UIConfig must match the LookoutUiConfig TypeScript interface defined in internal/lookoutui/src/lookoutUiConfig.d.ts
 type UIConfig struct {
 	CustomTitle string `json:"customTitle"`
@@ -176,4 +185,7 @@ type UIConfig struct {
 	JobLinks []JobLinkConfig `json:"jobLinks"`
 
 	CustomThemeConfigs *CustomThemeConfigs `json:"customThemeConfigs,omitempty"`
+
+	// TrackingScript is an optional tracking script configuration
+	TrackingScript *TrackingScriptConfig `json:"trackingScript,omitempty"`
 }

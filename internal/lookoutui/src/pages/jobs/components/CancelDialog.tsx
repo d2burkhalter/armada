@@ -24,6 +24,7 @@ import { useCancelJobs } from "../../../services/lookout/useCancelJobs"
 import { useGetAllJobsMatchingFilters } from "../../../services/lookout/useGetAllJobsMatchingFilters"
 
 import dialogStyles from "./DialogStyles.module.css"
+import { TrackingButton } from "components/TrackingButton"
 import { JobStatusTable } from "./JobStatusTable"
 
 interface CancelDialogProps {
@@ -208,7 +209,8 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
         >
           Refetch jobs
         </Button>
-        <Button
+        <TrackingButton
+          eventName="Cancel Jobs Clicked"
           onClick={handleCancelJobs}
           loading={isCancelling}
           disabled={isLoadingJobs || hasAttemptedCancel || cancellableJobs.length === 0}
@@ -216,7 +218,7 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
           endIcon={<Dangerous />}
         >
           Cancel {formatNumber(cancellableJobsCount)} {cancellableJobsCount === 1 ? "job" : "jobs"}
-        </Button>
+        </TrackingButton>
       </DialogActions>
     </Dialog>
   )
