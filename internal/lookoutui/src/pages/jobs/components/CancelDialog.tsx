@@ -13,6 +13,7 @@ import {
 } from "@mui/material"
 import { ErrorBoundary } from "react-error-boundary"
 
+import { TrackingButton } from "../../../analytics/TrackingButton"
 import { formatJobState } from "../../../common/jobsTableFormatters"
 import { waitMs, PlatformCancelReason } from "../../../common/utils"
 import { AlertErrorFallback } from "../../../components/AlertErrorFallback"
@@ -24,7 +25,6 @@ import { useCancelJobs } from "../../../services/lookout/useCancelJobs"
 import { useGetAllJobsMatchingFilters } from "../../../services/lookout/useGetAllJobsMatchingFilters"
 
 import dialogStyles from "./DialogStyles.module.css"
-import { TrackingButton } from "components/TrackingButton"
 import { JobStatusTable } from "./JobStatusTable"
 
 interface CancelDialogProps {
@@ -211,6 +211,7 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
         </Button>
         <TrackingButton
           eventName="Cancel Jobs Clicked"
+          eventData={{ foo: "bar" }}
           onClick={handleCancelJobs}
           loading={isCancelling}
           disabled={isLoadingJobs || hasAttemptedCancel || cancellableJobs.length === 0}

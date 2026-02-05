@@ -42,7 +42,8 @@ export interface JobLinkConfig {
 export interface TrackingScriptConfig {
   src: string
   attributes?: Record<string, string>
-  provider?: "umami" | "plausible" | "google-analytics" | "custom"
+  provider: "umami"
+  trackedEvents: string[]
 }
 
 // This must match the UIConfig Go struct defined in internal/lookout/configuration/types.go

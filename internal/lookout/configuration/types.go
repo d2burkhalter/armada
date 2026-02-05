@@ -151,6 +151,8 @@ type TrackingScriptConfig struct {
 	Attributes map[string]string `json:"attributes,omitempty"`
 	// Provider identifies the analytics provider (umami, plausible, google-analytics, custom)
 	Provider string `json:"provider,omitempty"`
+	// TrackedEvents is a list of event names that should be tracked
+	TrackedEvents []string `json:"trackedEvents,omitempty"`
 }
 
 // UIConfig must match the LookoutUiConfig TypeScript interface defined in internal/lookoutui/src/lookoutUiConfig.d.ts
