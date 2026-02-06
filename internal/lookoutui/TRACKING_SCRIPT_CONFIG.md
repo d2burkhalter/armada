@@ -34,11 +34,15 @@ uiConfig:
       - "Reprioritize Jobs Clicked"
 ```
 
+This will result in a tracking script being added to the `<head>` element and tracking attributes being added to elements
+
 ```html
 <head>
   ...
   <script src="https://analytics.yourdomain.com/script.js" defer="" data-website-id="your-website-id"></script>
 </head>
+...
+<button type="button" data-umami-event="Something Clicked" data-umami-event-yourevent="1">Something</button>
 ```
 
 ## Using TrackingButton Component
