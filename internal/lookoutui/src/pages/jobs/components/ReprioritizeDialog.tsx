@@ -13,6 +13,7 @@ import {
 } from "@mui/material"
 import { ErrorBoundary } from "react-error-boundary"
 
+import { TrackingButton } from "../../../analytics/TrackingButton"
 import { waitMs } from "../../../common/utils"
 import { AlertErrorFallback } from "../../../components/AlertErrorFallback"
 import { useFormatNumberWithUserSettings } from "../../../components/hooks/formatNumberWithUserSettings"
@@ -218,7 +219,9 @@ export const ReprioritizeDialog = ({ onClose, selectedItemFilters }: Reprioritiz
         >
           Refetch jobs
         </Button>
-        <Button
+        <TrackingButton
+          eventName="Reprioritize Jobs Clicked"
+          eventData={{ newPriority: newPriority?.toString() || "" }}
           onClick={handleReprioritizeJobs}
           loading={isReprioritizing}
           disabled={
@@ -228,7 +231,7 @@ export const ReprioritizeDialog = ({ onClose, selectedItemFilters }: Reprioritiz
           endIcon={<Dangerous />}
         >
           Reprioritize {formatNumber(reprioritizableJobsCount)} {reprioritizableJobsCount === 1 ? "job" : "jobs"}
-        </Button>
+        </TrackingButton>
       </DialogActions>
     </Dialog>
   )

@@ -211,7 +211,7 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
         </Button>
         <TrackingButton
           eventName="Cancel Jobs Clicked"
-          eventData={{ foo: "bar" }}
+          eventData={{ isPlatformCancel: isPlatformCancel.toString() }}
           onClick={handleCancelJobs}
           loading={isCancelling}
           disabled={isLoadingJobs || hasAttemptedCancel || cancellableJobs.length === 0}

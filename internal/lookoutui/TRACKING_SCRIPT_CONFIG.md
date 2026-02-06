@@ -8,10 +8,13 @@ uiConfig:
 
   trackingScript:
     src: "http://localhost:3000/script.js"
-    provider: "umami"  # Options: umami, plausible, google-analytics, custom
     attributes:
       data-website-id: "b92c8526-afb0-46c3-85d4-6878632efb01"
       # Add any other HTML attributes needed by your tracking script
+    eventAttribute: "data-foo-event" # add css attribute for tracking events
+    dataAttribute: "data-foo-event" # add css attribute for tracking event payloads
+    trackedEvents: # list of eventNames to track
+      - "Something Clicked"
 ```
 
 ## Examples
@@ -22,44 +25,20 @@ uiConfig:
 uiConfig:
   trackingScript:
     src: "https://analytics.yourdomain.com/script.js"
-    provider: "umami"
     attributes:
       data-website-id: "your-website-id"
+    eventAttribute: "data-umami-event"
+    dataAttribute: "data-umami-event"
+    trackedEvents:
+      - "Cancel Jobs Clicked"
+      - "Reprioritize Jobs Clicked"
 ```
 
-### Google Analytics
-
-```yaml
-uiConfig:
-  trackingScript:
-    src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-    provider: "google-analytics"
-    attributes:
-      async: "true"
-```
-
-### Plausible Analytics
-
-```yaml
-uiConfig:
-  trackingScript:
-    src: "https://plausible.io/js/script.js"
-    provider: "plausible"
-    attributes:
-      data-domain: "yourdomain.com"
-```
-
-### Custom Analytics
-
-```yaml
-uiConfig:
-  trackingScript:
-    src: "https://your-analytics-server.com/tracking.js"
-    provider: "custom"
-    attributes:
-      data-site-id: "your-site-id"
-      data-api-endpoint: "https://your-analytics-server.com/api"
-      # Add any custom attributes your tracking solution needs
+```html
+<head>
+  ...
+  <script src="https://analytics.yourdomain.com/script.js" defer="" data-website-id="your-website-id"></script>
+</head>
 ```
 
 ## Using TrackingButton Component
@@ -70,25 +49,18 @@ The `provider` field enables automatic event tracking using the `TrackingButton`
 import { TrackingButton } from "../components/TrackingButton"
 
 // Simple usage
-<TrackingButton eventName="Cancel Job">
-  Cancel
+<TrackingButton eventName="Something Clicked">
+  Something
 </TrackingButton>
 
 // With event data
-<TrackingButton 
-  eventName="Submit Job" 
-  eventData={{ queue: "default", jobCount: "5" }}
-  variant="contained"
+<TrackingButton
+  eventName="Submit Job"
+  eventData={{ foo: "bar", baz: "5" }}
 >
   Submit
 </TrackingButton>
 ```
-
-The component automatically generates the correct attributes:
-- **Umami**: `data-umami-event`, `data-umami-event-{key}`
-- **Plausible**: `data-plausible-event`, `data-plausible-event-props`
-- **Google Analytics**: `data-ga-event`, `data-ga-category`, `data-ga-label`
-- **Custom**: `data-event`, `data-event-{key}`
 
 ## Notes
 

@@ -149,8 +149,10 @@ type TrackingScriptConfig struct {
 	Src string `json:"src"`
 	// Attributes is a map of HTML attributes to add to the script tag
 	Attributes map[string]string `json:"attributes,omitempty"`
-	// Provider identifies the analytics provider (umami, plausible, google-analytics, custom)
-	Provider string `json:"provider,omitempty"`
+	// EventAttribute is the HTML attribute name to use for tracking events
+	EventAttribute string `json:"eventAttribute"`
+	// DataAttribute is the HTML attribute name to use for event data
+	DataAttribute string `json:"dataAttribute"`
 	// TrackedEvents is a list of event names that should be tracked
 	TrackedEvents []string `json:"trackedEvents,omitempty"`
 }
