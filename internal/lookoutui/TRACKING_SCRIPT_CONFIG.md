@@ -45,6 +45,8 @@ This will result in a tracking script being added to the `<head>` element and tr
 <button type="button" data-umami-event="Something Clicked" data-umami-event-yourevent="1">Something</button>
 ```
 
+Follow [Umami docs](https://umami.is/docs) on how to run and set up an instance of Umami. The `src` and `data-website-id` are in the <b>Tracking code</b> section.
+
 ## Using TrackingButton Component
 
 The `provider` field enables automatic event tracking using the `TrackingButton` component. This component wraps MUI Button and automatically adds the correct tracking attributes based on your provider:
