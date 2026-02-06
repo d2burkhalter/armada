@@ -1,13 +1,14 @@
 import { HTMLProps, memo, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react"
 
 import { TabContext, TabPanel, TabPanelProps } from "@mui/lab"
-import { Divider, Drawer, DrawerProps, Stack, styled, Tab, Tabs } from "@mui/material"
+import { Divider, Drawer, DrawerProps, Stack, styled, Tabs } from "@mui/material"
 import { grey } from "@mui/material/colors"
 import { ErrorBoundary } from "react-error-boundary"
 
+import { TrackingTab } from "../../../../analytics/TrackingTab"
 import { SPACING } from "../../../../common/spacing"
 import { AlertErrorFallback } from "../../../../components/AlertErrorFallback"
-import { CommandSpec } from "../../../../config"
+import { CommandSpec } from "../../../../config/types"
 import { Job, JobState } from "../../../../models/lookoutModels"
 
 import { SidebarHeader } from "./SidebarHeader"
@@ -59,7 +60,7 @@ const SidebarTabs = styled(Tabs)({
   flex: "0 0 auto",
 })
 
-const StyledSidebarTab = styled(Tab)({ minWidth: 50 })
+const StyledTrackingTab = styled(TrackingTab)({ minWidth: 50 })
 
 const Resizer = styled("div", { shouldForwardProp: (prop) => prop !== "isResizing" })<
   HTMLProps<"div"> & { isResizing: boolean }
@@ -249,16 +250,44 @@ export const Sidebar = memo(({ job, sidebarWidth, onClose, onWidthChange, comman
               <TabContext value={openTab}>
                 <TabsContainer>
                   <SidebarTabs value={openTab} onChange={handleTabChange}>
-                    <StyledSidebarTab label="Details" value={SidebarTab.JobDetails} />
-                    <StyledSidebarTab label="Result" value={SidebarTab.JobResult} />
+                    <StyledTrackingTab
+                      label="Details"
+                      value={SidebarTab.JobDetails}
+                      eventName="Sidebar Tab View"
+                      eventData={{ tab: "Details", jobState: job.state }}
+                    />
+                    <StyledTrackingTab
+                      label="Result"
+                      value={SidebarTab.JobResult}
+                      eventName="Sidebar Tab View"
+                      eventData={{ tab: "Result", jobState: job.state }}
+                    />
                     {job.state === JobState.Queued && (
-                      <StyledSidebarTab label="Scheduling" value={SidebarTab.Scheduling} />
+                      <StyledTrackingTab
+                        label="Scheduling"
+                        value={SidebarTab.Scheduling}
+                        eventName="Sidebar Tab View"
+                        eventData={{ tab: "Scheduling", jobState: job.state }}
+                      />
                     )}
-                    <StyledSidebarTab label="YAML" value={SidebarTab.Yaml} />
-                    <StyledSidebarTab label="Logs" value={SidebarTab.Logs} disabled={job.state === JobState.Queued} />
-                    <StyledSidebarTab
+                    <StyledTrackingTab
+                      label="YAML"
+                      value={SidebarTab.Yaml}
+                      eventName="Sidebar Tab View"
+                      eventData={{ tab: "YAML", jobState: job.state }}
+                    />
+                    <StyledTrackingTab
+                      label="Logs"
+                      value={SidebarTab.Logs}
+                      eventName="Sidebar Tab View"
+                      eventData={{ tab: "Logs", jobState: job.state }}
+                      disabled={job.state === JobState.Queued}
+                    />
+                    <StyledTrackingTab
                       label="Commands"
                       value={SidebarTab.Commands}
+                      eventName="Sidebar Tab View"
+                      eventData={{ tab: "Commands", jobState: job.state }}
                       disabled={job.state === JobState.Queued}
                     />
                   </SidebarTabs>
