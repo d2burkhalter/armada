@@ -117,6 +117,22 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
     refetch()
   }, [refetch])
 
+  const handleDialogKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (
+        event.key === "Enter" &&
+        !isLoadingJobs &&
+        !hasAttemptedCancel &&
+        !isCancelling &&
+        cancellableJobs.length > 0
+      ) {
+        event.preventDefault()
+        handleCancelJobs()
+      }
+    },
+    [isLoadingJobs, hasAttemptedCancel, isCancelling, cancellableJobs.length, handleCancelJobs],
+  )
+
   const jobsToRender = useMemo(() => cancellableJobs.slice(0, 1000), [cancellableJobs])
   const formatState = useCallback((job: Job) => formatJobState(job.state), [])
   const formatSubmittedTime = useCallback((job: Job) => formatIsoTimestamp(job.submitted, "full"), [formatIsoTimestamp])
@@ -126,7 +142,7 @@ export const CancelDialog = ({ onClose, selectedItemFilters }: CancelDialogProps
   const cancellableJobsCount = cancellableJobs.length
   const selectedJobsCount = selectedJobs.length
   return (
-    <Dialog open={true} onClose={onClose} fullWidth maxWidth="xl">
+    <Dialog open={true} onClose={onClose} fullWidth maxWidth="xl" onKeyDown={handleDialogKeyDown}>
       <DialogTitle>
         {isLoadingJobs
           ? "Cancel jobs"
