@@ -2,8 +2,8 @@ import { forwardRef, MouseEvent, useCallback } from "react"
 
 import { Tab, TabProps } from "@mui/material"
 
-import { buildTrackingAttributes } from "../common/trackingAttributes"
-import { getConfig } from "../config/config"
+import { buildTrackingAttributes } from "../../common/trackingAttributes"
+import { getConfig } from "../../config/config"
 
 interface TrackingTabProps extends TabProps {
   /**

@@ -47,12 +47,12 @@ This will result in a tracking script being added to the `<head>` element and tr
 
 Follow [Umami docs](https://umami.is/docs) on how to run and set up an instance of Umami. The `src` and `data-website-id` are in the <b>Tracking code</b> section.
 
-## Using TrackingButton Component
+## TrackingButton Component
 
-The `provider` field enables automatic event tracking using the `TrackingButton` component. This component wraps MUI Button and automatically adds the correct tracking attributes based on your provider:
+This component wraps MUI Button and adds tracking attributes
 
 ```tsx
-import { TrackingButton } from "../components/TrackingButton"
+import { TrackingButton } from "src/components/analytics/TrackingButton.tsx"
 
 // Simple usage
 <TrackingButton eventName="Something Clicked">
@@ -63,9 +63,33 @@ import { TrackingButton } from "../components/TrackingButton"
 <TrackingButton
   eventName="Submit Job"
   eventData={{ foo: "bar", baz: "5" }}
+  ...
 >
   Submit
 </TrackingButton>
+```
+
+## TackingTab Component
+
+This component wraps the MUI Tab and adds tracking attributes, the eventName can be shared between multiple tabs and eventData can be used to track which tab was accessed
+
+```tsx
+import { TrackingTab } from "/analytics/TrackingTab"
+
+<TabsContainer>
+  <SidebarTabs>
+    <TrackingTab>
+      eventName="Sidebar Tab"
+      eventData={{ tab: "Info Page" }}
+      ...
+      />
+    <TrackingTab>
+      eventName="Sidebar Tab"
+      eventData={{ tab: "Contact Page" }}
+      ...
+      />
+  </SidebarTab>
+</TabsContainer>
 ```
 
 ## Notes

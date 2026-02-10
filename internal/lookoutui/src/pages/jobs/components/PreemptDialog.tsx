@@ -13,10 +13,10 @@ import {
 } from "@mui/material"
 import { ErrorBoundary } from "react-error-boundary"
 
-import { TrackingButton } from "../../../analytics/TrackingButton"
 import { formatJobState } from "../../../common/jobsTableFormatters"
 import { waitMs } from "../../../common/utils"
 import { AlertErrorFallback } from "../../../components/AlertErrorFallback"
+import { TrackingButton } from "../../../components/analytics/TrackingButton"
 import { useFormatNumberWithUserSettings } from "../../../components/hooks/formatNumberWithUserSettings"
 import { useFormatIsoTimestampWithUserSettings } from "../../../components/hooks/formatTimeWithUserSettings"
 import { useCustomSnackbar } from "../../../components/hooks/useCustomSnackbar"

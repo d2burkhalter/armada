@@ -5,9 +5,9 @@ import { Divider, Drawer, DrawerProps, Stack, styled, Tabs } from "@mui/material
 import { grey } from "@mui/material/colors"
 import { ErrorBoundary } from "react-error-boundary"
 
-import { TrackingTab } from "../../../../analytics/TrackingTab"
 import { SPACING } from "../../../../common/spacing"
 import { AlertErrorFallback } from "../../../../components/AlertErrorFallback"
+import { TrackingTab } from "../../../../components/analytics/TrackingTab"
 import { CommandSpec } from "../../../../config/types"
 import { Job, JobState } from "../../../../models/lookoutModels"
 

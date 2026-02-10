@@ -2,8 +2,8 @@ import { forwardRef } from "react"
 
 import { Button, ButtonProps } from "@mui/material"
 
-import { buildTrackingAttributes } from "../common/trackingAttributes"
-import { getConfig } from "../config"
+import { buildTrackingAttributes } from "../../common/trackingAttributes"
+import { getConfig } from "../../config"
 
 interface TrackingButtonProps extends ButtonProps {
   /**
