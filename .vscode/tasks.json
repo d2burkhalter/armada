@@ -21,6 +21,11 @@
     },
     {
       "type": "shell",
+      "command": "mage kind && mage startDependencies -auth",
+      "label": "Start dependencies auth"
+    },
+    {
+      "type": "shell",
       "command": "go",
       "label": "Migrate Lookout database",
       "args": ["run", "${workspaceFolder}/cmd/lookout", "--migrateDatabase"]
@@ -37,6 +42,16 @@
       "dependsOn": [
         "Download Go modules",
         "Start dependencies",
+        "Migrate Lookout database",
+        "Migrate Scheduler database"
+      ]
+    },
+    {
+      "label": "Set up dependencies auth",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Download Go modules",
+        "Start dependencies auth",
         "Migrate Lookout database",
         "Migrate Scheduler database"
       ]

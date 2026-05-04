@@ -60,13 +60,19 @@ func RunMigrations() error {
 }
 
 // Starts armada infrastructure dependencies
-func StartDependencies() error {
+func StartDependencies(auth *bool) error {
+	if auth != nil && *auth {
+		dependencies = append(dependencies, "keycloak")
+	}
 	command := append([]string{"compose", "up", "-d"}, dependencies...)
 	return dockerRun(command...)
 }
 
 // Stops the dependencies.
-func StopDependencies() error {
+func StopDependencies(auth *bool) error {
+	if auth != nil && *auth {
+		dependencies = append(dependencies, "keycloak")
+	}
 	command := append([]string{"compose", "stop"}, dependencies...)
 	if err := dockerRun(command...); err != nil {
 		return err
